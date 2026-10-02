@@ -1,20 +1,175 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>나의 테스트</title><style>
-:root{--bg:#f7f4ee;--card:#fff;--ink:#242424;--muted:#6d6d6d;--accent:#f2c94c;--line:#e8e3d8}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;line-height:1.7}
-.wrap{max-width:900px;margin:auto;padding:28px 20px 70px}.nav{display:flex;gap:18px;flex-wrap:wrap;padding:12px 0 30px;border-bottom:1px solid var(--line)}.nav a{color:var(--ink);text-decoration:none;font-weight:700}
-.hero{padding:70px 0 50px}.badge{display:inline-block;background:var(--accent);padding:6px 12px;border-radius:999px;font-weight:800;font-size:13px}.hero h1{font-size:48px;line-height:1.1;margin:18px 0 14px}.hero p{font-size:20px;color:var(--muted);max-width:680px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin:30px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px}.card h3{margin-top:0}.section{margin:46px 0}.section h2{font-size:28px}.small{color:var(--muted);font-size:14px}.footer{border-top:1px solid var(--line);padding-top:25px;color:var(--muted);font-size:14px}
-a{color:#5a4a00}
-</style></head><body><main class="wrap">
-<nav class="nav"><a href="index.html">나의 테스트</a><a href="privacy.html">개인정보처리방침</a><a href="terms.html">이용약관</a><a href="support.html">고객지원</a></nav>
-<section class="hero"><span class="badge">STUDY · TEST</span><h1>나의 테스트</h1><p>파일과 유튜브 강의를 바탕으로 문제를 만들고, 시험부터 오답풀이와 재시험까지 이어가는 학습 도우미입니다.</p></section>
-<section class="section"><h2>무엇을 할 수 있나요?</h2><div class="grid">
-<div class="card"><h3>📄 파일 업로드 문제풀기</h3><p>학습 자료를 바탕으로 객관식 문제를 풀 수 있습니다.</p></div>
-<div class="card"><h3>▶️ 유튜브 링크 문제풀기</h3><p>강의 영상의 학습 내용을 문제 형태로 복습할 수 있습니다.</p></div>
-<div class="card"><h3>📕 오답풀이</h3><p>틀린 문제를 다시 확인하고 해설을 보며 복습할 수 있습니다.</p></div>
-<div class="card"><h3>🔁 틀린 문제 재시험</h3><p>오답만 다시 풀어보고, 보기 순서를 섞어 단순 암기를 줄입니다.</p></div>
-</div></section>
-<section class="section"><h2>이용 대상</h2><p>자격시험, 강의 복습, 개인 학습 등 문제를 풀면서 공부하고 싶은 사용자를 위한 학습 도구입니다.</p></section>
-<section class="section"><h2>제공 방식</h2><p>나의 테스트는 ChatGPT 안에서 학습 흐름을 제공하는 교육용 플러그인입니다. 시험 결과와 해설은 학습 보조를 위한 것이며 전문적인 교육·시험기관의 공식 결과를 대신하지 않습니다.</p></section>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>나의 테스트</title>
+<style>
+:root{--bg:#f7f4ee;--card:#fff;--ink:#242424;--muted:#707070;--accent:#f2c94c;--line:#e5dfd3;--blue:#4f6df5;--danger:#e85d5d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;line-height:1.6}
+button,input{font:inherit}
+.wrap{max-width:900px;margin:auto;padding:18px 16px 70px}
+.nav{display:flex;gap:14px;flex-wrap:wrap;padding:8px 0 20px;border-bottom:1px solid var(--line)}
+.nav a{color:var(--ink);text-decoration:none;font-weight:700}
+.hero{padding:42px 0 25px}
+.badge{display:inline-block;background:var(--accent);padding:5px 12px;border-radius:999px;font-weight:800;font-size:13px}
+h1{font-size:clamp(34px,8vw,52px);line-height:1.1;margin:15px 0 10px}
+.hero p{font-size:18px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:24px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 3px 12px #00000008}
+.action{width:100%;border:0;border-radius:15px;padding:15px 14px;margin-top:12px;background:var(--ink);color:white;font-weight:800;cursor:pointer;touch-action:manipulation}
+.action.secondary{background:#eee9df;color:var(--ink)}
+.action.blue{background:var(--blue)}
+.action:active{transform:scale(.98)}
+.section{margin:30px 0}
+.panel{display:none;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:18px}
+.panel.show{display:block}
+input[type=text]{width:100%;padding:14px;border:1px solid #d7d1c5;border-radius:12px;background:white}
+.file{display:block;border:2px dashed #cfc7b8;border-radius:16px;padding:20px;text-align:center;cursor:pointer}
+.file input{display:none}
+.question{font-size:21px;font-weight:800;margin:10px 0 18px}
+.option{display:block;width:100%;text-align:left;border:1px solid #d9d3c8;background:white;border-radius:13px;padding:14px;margin:9px 0;cursor:pointer;touch-action:manipulation}
+.option.selected{border:2px solid var(--blue);background:#f2f5ff}
+.option.correct{border:2px solid #43a047;background:#effaf0}
+.option.wrong{border:2px solid var(--danger);background:#fff1f1}
+.meta{color:var(--muted);font-size:14px}
+.result{font-size:20px;font-weight:800}
+.notice{padding:12px 14px;background:#f3f0e9;border-radius:12px;margin:12px 0}
+.hidden{display:none!important}
+.footer{border-top:1px solid var(--line);padding-top:25px;color:var(--muted);font-size:14px;margin-top:45px}
+</style>
+</head>
+<body>
+<main class="wrap">
+<nav class="nav">
+<a href="#" onclick="showHome();return false">나의 테스트</a>
+<a href="privacy.html">개인정보처리방침</a>
+<a href="terms.html">이용약관</a>
+<a href="support.html">고객지원</a>
+</nav>
+
+<section id="home">
+<div class="hero">
+<span class="badge">STUDY · TEST</span>
+<h1>나의 테스트</h1>
+<p>학습자료를 바탕으로 문제를 풀고, 오답을 모아 다시 공부할 수 있는 학습 도우미입니다.</p>
+</div>
+
+<div class="grid">
+<div class="card"><h3>📄 파일 업로드 문제풀기</h3><p>텍스트 학습자료를 불러와 문제를 만들어 봅니다.</p><button class="action blue" onclick="openFilePanel()">시작하기</button></div>
+<div class="card"><h3>▶️ 유튜브 링크 문제풀기</h3><p>강의 링크를 저장하고 학습을 시작합니다.</p><button class="action" onclick="openYoutubePanel()">시작하기</button></div>
+<div class="card"><h3>📕 오답풀이</h3><p>최근에 틀린 문제를 다시 확인합니다.</p><button class="action secondary" onclick="openWrong()">오답 보기</button></div>
+<div class="card"><h3>🔁 틀린 문제 재시험</h3><p>오답만 다시 풀고 보기 순서를 섞습니다.</p><button class="action secondary" onclick="retryWrong()">재시험 시작</button></div>
+</div>
+</section>
+
+<section id="filePanel" class="panel">
+<h2>📄 파일 업로드</h2>
+<label class="file">학습자료 선택
+<input id="fileInput" type="file" accept=".txt,.md,.html,.csv,.json">
+</label>
+<div id="fileStatus" class="notice hidden"></div>
+<button class="action blue" onclick="makeDemoQuiz()">문제 만들기</button>
+<button class="action secondary" onclick="showHome()">홈으로</button>
+</section>
+
+<section id="youtubePanel" class="panel">
+<h2>▶️ 유튜브 링크</h2>
+<input id="youtubeUrl" type="text" placeholder="https://youtu.be/...">
+<div class="notice">현재 GitHub Pages만으로는 유튜브 영상의 자막을 직접 가져올 수 없습니다. 링크 입력과 학습 화면은 작동하며, 실제 영상 기반 문제 생성은 서버/AI 연결이 필요합니다.</div>
+<button class="action blue" onclick="startYoutube()">학습 시작</button>
+<button class="action secondary" onclick="showHome()">홈으로</button>
+</section>
+
+<section id="wrongPanel" class="panel">
+<h2>📕 오답노트</h2>
+<div id="wrongList"></div>
+<button class="action secondary" onclick="showHome()">홈으로</button>
+</section>
+
+<section id="quizPanel" class="panel">
+<div class="meta" id="quizMeta"></div>
+<div class="question" id="quizQuestion"></div>
+<div id="options"></div>
+<button id="nextBtn" class="action blue" onclick="nextQuestion()">다음 문제</button>
+<div id="explanation" class="notice hidden"></div>
+</section>
+
 <footer class="footer">© 2026 나의 테스트 · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a> · <a href="support.html">고객지원</a></footer>
-</main></body></html>
+</main>
+
+<script>
+const demoQuestions=[
+ {q:"학습 자료를 바탕으로 문제를 만드는 목적은 무엇인가요?",a:["복습과 이해도 확인","파일 삭제","계정 만들기","광고 보기"],c:0,e:"학습 내용을 문제로 풀면 이해도를 확인하고 복습할 수 있습니다."},
+ {q:"오답 재시험에서 보기 순서를 섞는 이유는 무엇인가요?",a:["정답 번호 암기를 줄이기 위해","문제를 없애기 위해","시험 시간을 늘리기 위해","점수를 숨기기 위해"],c:0,e:"보기 순서를 섞으면 선택지 번호를 외워서 맞히는 것을 줄일 수 있습니다."},
+ {q:"오답노트의 가장 직접적인 용도는 무엇인가요?",a:["틀린 내용을 다시 확인하는 것","휴대폰 설정 변경","파일 이름 변경","웹사이트 종료"],c:0,e:"오답노트는 틀린 문제와 해설을 다시 보며 복습하는 데 사용합니다."}
+];
+let quiz=[],idx=0,score=0,selected=-1;
+let wrong=JSON.parse(localStorage.getItem("myTestWrong")||"[]");
+
+function hidePanels(){document.querySelectorAll(".panel").forEach(x=>x.classList.remove("show"))}
+function showHome(){hidePanels();document.getElementById("home").classList.remove("hidden");window.scrollTo(0,0)}
+function openFilePanel(){hidePanels();document.getElementById("home").classList.add("hidden");document.getElementById("filePanel").classList.add("show");window.scrollTo(0,0)}
+function openYoutubePanel(){hidePanels();document.getElementById("home").classList.add("hidden");document.getElementById("youtubePanel").classList.add("show");window.scrollTo(0,0)}
+function openWrong(){document.getElementById("home").classList.add("hidden");hidePanels();document.getElementById("wrongPanel").classList.add("show");renderWrong();window.scrollTo(0,0)}
+
+document.getElementById("fileInput").addEventListener("change",e=>{
+ const f=e.target.files[0]; if(!f)return;
+ document.getElementById("fileStatus").classList.remove("hidden");
+ document.getElementById("fileStatus").textContent="선택됨: "+f.name+" · 파일을 읽을 준비가 됐습니다.";
+});
+
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function makeDemoQuiz(){startQuiz(demoQuestions)}
+function startYoutube(){
+ const u=document.getElementById("youtubeUrl").value.trim();
+ if(!u){alert("유튜브 링크를 입력해 주세요.");return}
+ localStorage.setItem("lastYoutubeUrl",u);
+ startQuiz(demoQuestions);
+}
+function startQuiz(source){
+ quiz=source.map(x=>({q:x.q,a:shuffle(x.a),orig:x,e:x.e}));
+ quiz.forEach(x=>{x.c=x.a.indexOf(x.orig.a[x.orig.c])});
+ idx=0;score=0;selected=-1;
+ document.getElementById("home").classList.add("hidden");hidePanels();document.getElementById("quizPanel").classList.add("show");renderQuestion();window.scrollTo(0,0);
+}
+function renderQuestion(){
+ const x=quiz[idx];selected=-1;
+ document.getElementById("quizMeta").textContent=(idx+1)+" / "+quiz.length+" 문제";
+ document.getElementById("quizQuestion").textContent=x.q;
+ document.getElementById("options").innerHTML=x.a.map((o,i)=>`<button class="option" onclick="choose(${i})">${i+1}. ${o}</button>`).join("");
+ document.getElementById("explanation").classList.add("hidden");
+ document.getElementById("nextBtn").textContent=idx===quiz.length-1?"채점하기":"다음 문제";
+}
+function choose(i){
+ if(selected!==-1)return;
+ selected=i;const x=quiz[idx];
+ document.querySelectorAll(".option").forEach((b,n)=>{if(n===i)b.classList.add(n===x.c?"correct":"wrong");if(n===x.c)b.classList.add("correct")});
+ if(i===x.c)score++;else{
+   wrong.push(x);localStorage.setItem("myTestWrong",JSON.stringify(wrong));
+ }
+ const ex=document.getElementById("explanation");ex.textContent="해설: "+x.e;ex.classList.remove("hidden");
+}
+function nextQuestion(){
+ if(selected===-1){alert("답을 하나 선택해 주세요.");return}
+ if(idx<quiz.length-1){idx++;renderQuestion()}else{
+   document.getElementById("quizQuestion").textContent="시험 완료 🎉";
+   document.getElementById("options").innerHTML=`<div class="result">${quiz.length}문제 중 ${score}문제 정답</div>`;
+   document.getElementById("quizMeta").textContent="결과";
+   document.getElementById("nextBtn").textContent="홈으로";
+   document.getElementById("nextBtn").onclick=showHome;
+ }
+}
+function renderWrong(){
+ const box=document.getElementById("wrongList");
+ if(!wrong.length){box.innerHTML='<div class="notice">아직 오답이 없습니다.</div>';return}
+ box.innerHTML=wrong.map((x,i)=>`<div class="card" style="margin:10px 0"><b>${i+1}. ${x.q}</b><p class="small">정답: ${x.orig.a[x.orig.c]}</p><p>${x.e}</p></div>`).join("");
+}
+function retryWrong(){
+ if(!wrong.length){alert("아직 다시 풀 오답이 없습니다.");return}
+ startQuiz(wrong.map(x=>x.orig||x));
+}
+</script>
+</body>
+</html>
